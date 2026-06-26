@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+body {
+  @apply bg-brand-background text-brand-primaryText font-sans antialiased selection:bg-brand-accent/30 selection:text-white;
+}
+
+/* Force dark mode behavior since we are defaulting to this dark-matte premium look */
+.dark body {
+  @apply bg-brand-background text-brand-primaryText;
+}
+
+@layer utilities {
+  .luxury-card {
+    @apply bg-brand-surface border border-brand-border shadow-luxury rounded-2xl transition-all duration-300 relative overflow-hidden;
+  }
+  .luxury-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 pointer-events-none;
+  }
+  .luxury-card:hover {
+    @apply shadow-luxury-hover border-white/20 transform -translate-y-1;
+  }
+  .luxury-card:hover::before {
+    @apply opacity-100;
+  }
+  
+  .glass-panel {
+    @apply bg-brand-surface/80 backdrop-blur-md border border-brand-border shadow-luxury rounded-2xl;
+  }
+
+  .luxury-input {
+    @apply bg-brand-background border border-brand-border rounded-xl px-4 py-3 text-brand-primaryText focus:outline-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent focus:shadow-glow transition-all duration-300 placeholder-brand-secondaryText w-full;
+  }
+  
+  .luxury-button {
+    @apply bg-gradient-to-r from-blue-600 to-brand-accent hover:from-blue-500 hover:to-blue-400 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 font-medium relative overflow-hidden active:scale-[0.98];
+  }
+}
+
+/* Custom scrollbar for premium look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-surface rounded-full border border-brand-border hover:bg-brand-card transition-colors;
+}
+
