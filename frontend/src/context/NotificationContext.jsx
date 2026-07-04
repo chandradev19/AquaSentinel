@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useAuth } from './AuthContext';
-import api from '../services/api';
+import api, { API_URL } from '../services/api';
 
 const NotificationContext = createContext();
 
@@ -70,7 +70,7 @@ export const NotificationProvider = ({ children }) => {
     let eventSource;
 
     try {
-      const sseUrl = `https://aquasentinel-backend-v2.onrender.com/api/stream/notifications?token=${token}`;
+      const sseUrl = `${API_URL}/stream/notifications?token=${token}`;
       eventSource = new EventSource(sseUrl);
 
       eventSource.addEventListener('INIT', (e) => {

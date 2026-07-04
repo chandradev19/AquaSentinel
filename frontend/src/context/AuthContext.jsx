@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { API_URL } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -25,9 +26,7 @@ export const AuthProvider = ({ children }) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         try {
-          const res = await axios.get(
-            'https://aquasentinel-backend-v2.onrender.com/api/auth/me'
-          );
+          const res = await axios.get(`${API_URL}/auth/me`);
           setUser(res.data);
         } catch (error) {
           console.error("Failed to fetch user", error);

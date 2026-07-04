@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Shield, Eye, EyeOff, Server, Activity, Database, Droplet } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { API_URL } from '../services/api';
 import { motion } from 'framer-motion';
 
 const Login = () => {
@@ -55,7 +56,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('https://aquasentinel-backend-v2.onrender.com/api/auth/login', {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

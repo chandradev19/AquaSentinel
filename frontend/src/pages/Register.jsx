@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const API_URL = "https://aquasentinel-backend-v2.onrender.com";
+import { API_BASE_URL } from '../services/api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/villages`)
+    fetch(`${API_BASE_URL}/api/villages`)
       .then((res) => (res.ok ? res.json() : []))
       .then((data) => setVillages(Array.isArray(data) ? data : []))
       .catch(() => setVillages([]));
@@ -45,7 +44,7 @@ const Register = () => {
           : null,
       };
 
-      const res = await fetch(`${API_URL}/api/auth/register`, {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
