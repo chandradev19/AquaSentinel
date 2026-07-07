@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import { motion } from 'framer-motion';
@@ -10,6 +10,21 @@ const Profile = () => {
   const [phone, setPhone] = useState(user?.phone || '');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await api.get('/citizen/profile');
+        if (response.data) {
+          setName(response.data.name || '');
+          setPhone(response.data.phone || '');
+        }
+      } catch (error) {
+        console.error("Failed to fetch profile", error);
+      }
+    };
+    fetchProfile();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +41,12 @@ const Profile = () => {
       const response = await api.put(endpoint, { name, phone });
       if (response.data?.success) {
         setMessage('Profile updated successfully!');
-        // Ideally we'd refresh user context here
+        // Refresh user profile data
+        const profileRes = await api.get('/citizen/profile');
+        if (profileRes.data) {
+          setName(profileRes.data.name || '');
+          setPhone(profileRes.data.phone || '');
+        }
       } else {
         setMessage('Failed to update profile.');
       }

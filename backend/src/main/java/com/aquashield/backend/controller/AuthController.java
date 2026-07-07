@@ -138,7 +138,8 @@ public class AuthController {
         userData.put("id", user.getId());
         userData.put("name", user.getName());
         userData.put("email", user.getEmail());
-        userData.put("role", user.getRole());
+        userData.put("phone", user.getPhone());
+        userData.put("role", user.getRole().name());
         userData.put("villageId", user.getVillage() != null ? user.getVillage().getId() : null);
         return ResponseEntity.ok(userData);
     }

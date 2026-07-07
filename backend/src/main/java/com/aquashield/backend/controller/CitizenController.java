@@ -141,6 +141,20 @@ public class CitizenController {
         return ResponseEntity.ok(waterQualityRepository.findByVillageId(user.getVillage().getId()));
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElse(null);
+        if (user == null) return ResponseEntity.badRequest().build();
+
+        java.util.Map<String, Object> profile = new java.util.HashMap<>();
+        profile.put("name", user.getName());
+        profile.put("phone", user.getPhone());
+        profile.put("email", user.getEmail());
+        profile.put("role", user.getRole().name());
+        return ResponseEntity.ok(profile);
+    }
+
     @PutMapping("/profile")
     public ResponseEntity<?> updateProfile(@RequestBody java.util.Map<String, String> request) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
