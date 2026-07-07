@@ -7,10 +7,10 @@ import { usePresentation } from '../../context/PresentationContext';
 import { 
   LayoutDashboard, Map, Activity, Shield, Users, Stethoscope, 
   Bell, BarChart3, Cpu, Settings, FileClock, ChevronRight, LogOut, Globe, Clipboard, Droplet,
-  Clock, MapPin, FileText, PlayCircle, Zap
+  Clock, MapPin, FileText, PlayCircle, Zap, X
 } from 'lucide-react';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
   const { startDemo, isDemoActive, stopDemo } = usePresentation();
   const location = useLocation();
@@ -19,9 +19,15 @@ const Sidebar = () => {
   const handleLogout = () => {
     logout();
     navigate('/login');
+    if (onClose) onClose();
   };
 
   const isActive = (path) => location.pathname === path;
+
+  // Close drawer on nav click (mobile)
+  const handleNavClick = () => {
+    if (onClose) onClose();
+  };
 
   // Role-filtered menu configuration
   const menuSections = [
@@ -109,26 +115,37 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64 bg-brand-background border-r border-brand-border h-screen flex flex-col flex-shrink-0 relative overflow-hidden z-20 font-sans">
-      {/* Brand logo details matching command center style */}
-      <div className="h-24 flex items-center px-6 border-b border-brand-border/50 relative">
+      {/* Brand logo + mobile close button */}
+      <div className="h-16 sm:h-24 flex items-center px-4 sm:px-6 border-b border-brand-border/50 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/5 to-transparent pointer-events-none" />
-        <Shield className="w-9 h-9 text-brand-accent mr-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]" />
-        <div>
-          <h1 className="text-white font-extrabold text-base tracking-wide flex items-center">
+        <Shield className="w-7 h-7 sm:w-9 sm:h-9 text-brand-accent mr-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.4)] shrink-0" />
+        <div className="flex-1 min-w-0">
+          <h1 className="text-white font-extrabold text-sm sm:text-base tracking-wide flex items-center">
             AquaShield AI
           </h1>
-          <p className="text-[9px] text-brand-secondaryText uppercase tracking-widest font-semibold mt-0.5 leading-tight">
-            Health Intelligence & Early Warning System
+          <p className="text-[8px] sm:text-[9px] text-brand-secondaryText uppercase tracking-widest font-semibold mt-0.5 leading-tight">
+            Health Intelligence & Early Warning
           </p>
         </div>
+        {/* Close button — mobile only */}
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="ml-2 p-1.5 rounded-lg text-brand-secondaryText hover:text-white hover:bg-brand-surface transition-colors md:hidden shrink-0"
+            aria-label="Close sidebar"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
 
       {/* Main navigation links */}
-      <div className="flex-1 overflow-y-auto py-6 px-4 space-y-6 custom-scrollbar">
+      <div className="flex-1 overflow-y-auto py-4 sm:py-6 px-3 sm:px-4 space-y-4 sm:space-y-6 custom-scrollbar">
         {/* Prominent National Overview/Dashboard top-level button */}
-        <div className="mb-4">
+        <div className="mb-2 sm:mb-4">
           <NavLink
             to={topLevel.path}
+            onClick={handleNavClick}
             className={({ isActive }) => `
               relative group flex items-center px-4 py-3 rounded-xl transition-all duration-300
               ${isActive ? 'text-white bg-brand-accent shadow-[0_0_15px_rgba(59,130,246,0.3)] border border-brand-accent/50' : 'text-brand-secondaryText hover:text-white hover:bg-brand-surface/50'}
@@ -142,7 +159,7 @@ const Sidebar = () => {
         </div>
 
         {filteredSections.map((section, idx) => (
-          <div key={idx} className="space-y-2">
+          <div key={idx} className="space-y-1 sm:space-y-2">
             <h3 className="text-[10px] font-black text-brand-secondaryText tracking-widest pl-3 uppercase">
               {section.title}
             </h3>
@@ -154,6 +171,7 @@ const Sidebar = () => {
                   <NavLink
                     key={item.name}
                     to={item.path}
+                    onClick={handleNavClick}
                     className={({ isActive }) => `
                       relative group flex items-center px-3.5 py-2.5 rounded-xl transition-all duration-300
                       ${isActive ? 'text-white bg-brand-surface border border-brand-border' : 'text-brand-secondaryText hover:text-white hover:bg-brand-surface/50'}
@@ -177,7 +195,7 @@ const Sidebar = () => {
           </div>
         ))}
 
-        {/* AI System Status widget from reference image */}
+        {/* AI System Status widget */}
         <div className="pt-4 border-t border-brand-border/50 space-y-3">
           <h3 className="text-[10px] font-black text-brand-secondaryText tracking-widest pl-3 uppercase">
             AI System Status
@@ -203,11 +221,11 @@ const Sidebar = () => {
       </div>
 
       {/* Footer / Account Management */}
-      <div className="p-4 border-t border-brand-border/50 bg-gradient-to-t from-brand-surface/50 to-transparent">
+      <div className="p-3 sm:p-4 border-t border-brand-border/50 bg-gradient-to-t from-brand-surface/50 to-transparent">
         {user?.role === 'ADMIN' && (
           <button
             onClick={isDemoActive ? stopDemo : startDemo}
-            className={`flex items-center justify-center w-full px-4 py-3 mb-3 text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-glow border ${isDemoActive ? 'bg-brand-danger text-white border-brand-danger/50 shadow-[0_0_15px_rgba(239,68,68,0.4)]' : 'bg-brand-accent text-white border-brand-accent/50 shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:bg-blue-600'}`}
+            className={`flex items-center justify-center w-full px-4 py-2.5 sm:py-3 mb-3 text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-glow border ${isDemoActive ? 'bg-brand-danger text-white border-brand-danger/50 shadow-[0_0_15px_rgba(239,68,68,0.4)]' : 'bg-brand-accent text-white border-brand-accent/50 shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:bg-blue-600'}`}
           >
             <PlayCircle className={`w-4 h-4 mr-2 ${isDemoActive ? 'animate-pulse' : ''}`} />
             {isDemoActive ? 'STOP DEMO' : 'START SIH DEMO'}
@@ -221,7 +239,7 @@ const Sidebar = () => {
           Secure Logout
         </button>
         <div className="flex items-center p-2.5 rounded-xl bg-brand-surface/40 border border-brand-border/50">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-accent to-blue-800 flex items-center justify-center text-white text-xs font-black shadow-glow">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-accent to-blue-800 flex items-center justify-center text-white text-xs font-black shadow-glow shrink-0">
             {user?.name?.charAt(0) || 'A'}
           </div>
           <div className="ml-2.5 overflow-hidden">

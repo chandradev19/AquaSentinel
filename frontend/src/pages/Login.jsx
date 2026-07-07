@@ -189,13 +189,13 @@ const Login = () => {
       </div>
 
       {/* RIGHT COLUMN: Glassmorphic Login Form Card */}
-      <div className="col-span-1 lg:col-span-5 flex flex-col justify-center p-8 sm:p-12 md:p-16 bg-brand-background relative z-10">
+      <div className="col-span-1 lg:col-span-5 flex flex-col justify-center p-4 sm:p-8 md:p-12 lg:p-16 bg-brand-background relative z-10 min-h-screen lg:min-h-0">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="max-w-md w-full mx-auto space-y-8 glass-panel p-10 border border-brand-border shadow-luxury"
+          className="max-w-md w-full mx-auto space-y-6 sm:space-y-8 glass-panel p-5 sm:p-8 md:p-10 border border-brand-border shadow-luxury"
         >
           <div className="text-center">
             <h2 className="text-3xl font-extrabold tracking-tight text-white">Secure Command</h2>

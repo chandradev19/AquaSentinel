@@ -109,7 +109,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-0 mt-3 w-80 bg-brand-surface border border-brand-border rounded-2xl shadow-luxury overflow-hidden z-50"
+                className="absolute right-0 mt-3 w-[calc(100vw-2rem)] max-w-sm sm:w-80 bg-brand-surface border border-brand-border rounded-2xl shadow-luxury overflow-hidden z-50"
               >
                 <div className="p-4 border-b border-brand-border/50 flex justify-between items-center bg-brand-card/50">
                   <h3 className="text-sm font-semibold text-white">Alerts & Warnings</h3>

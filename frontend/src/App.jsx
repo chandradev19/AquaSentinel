@@ -6,8 +6,8 @@ import { NotificationProvider } from './context/NotificationContext';
 
 // Layout & UI
 import MainLayout from './components/layout/MainLayout';
-import Sidebar from './components/layout/Sidebar';
 import EmergencyOverlay from './components/shared/EmergencyOverlay';
+
 
 // Pages
 import LandingPage from './pages/LandingPage';
@@ -70,16 +70,13 @@ function App() {
       return <Navigate to="/login" />;
     }
     if (allowedRoles && !allowedRoles.includes(user.role)) {
-      return <Navigate to="/" />; // Or unauthorized, which redirects dynamically
+      return <Navigate to="/" />; // Redirect to root which will re-route by role
     }
-    // For protected routes, we wrap them in a standard layout containing the Sidebar
+    // Wrap in MainLayout which contains Sidebar + responsive hamburger
     return (
-      <div className="flex h-screen overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 overflow-y-auto p-4 md:p-8">
-          {children}
-        </main>
-      </div>
+      <MainLayout>
+        {children}
+      </MainLayout>
     );
   };
 

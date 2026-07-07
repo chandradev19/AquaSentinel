@@ -154,10 +154,10 @@ const CitizenDashboard = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col lg:flex-row gap-6 max-w-[1600px] mx-auto w-full relative z-10 overflow-hidden pb-6">
+    <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 max-w-[1600px] mx-auto w-full relative z-10 pb-6 min-h-0" style={{ height: 'calc(100dvh - 5rem)' }}>
       
       {/* LEFT MAIN PANEL - AI Chat Area */}
-      <div className="w-full lg:w-3/5 flex flex-col glass-panel overflow-hidden border border-brand-border/60 shadow-2xl relative">
+      <div className="w-full lg:w-3/5 flex flex-col glass-panel overflow-hidden border border-brand-border/60 shadow-2xl relative" style={{ minHeight: '60dvh', maxHeight: 'calc(100dvh - 5rem)' }}>
         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-accent/5 rounded-full blur-[80px] pointer-events-none" />
         
         {/* Chat Header */}
@@ -177,10 +177,10 @@ const CitizenDashboard = () => {
           </div>
           <button 
             onClick={() => setShowEmergencyModal(true)}
-            className="hidden md:flex items-center px-4 py-2 bg-brand-danger/20 hover:bg-brand-danger/30 text-brand-danger text-xs font-bold uppercase tracking-wider rounded-lg border border-brand-danger/40 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]"
+            className="flex items-center px-3 sm:px-4 py-2 bg-brand-danger/20 hover:bg-brand-danger/30 text-brand-danger text-xs font-bold uppercase tracking-wider rounded-lg border border-brand-danger/40 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]"
           >
-            <ShieldAlert className="w-4 h-4 mr-2" />
-            SOS Report
+            <ShieldAlert className="w-4 h-4 sm:mr-2" />
+            <span className="hidden sm:inline">SOS Report</span>
           </button>
         </div>
 
@@ -197,7 +197,7 @@ const CitizenDashboard = () => {
                 <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-md ${msg.senderType === 'BOT' ? 'bg-gradient-to-br from-brand-surface to-brand-background border border-brand-border' : 'bg-brand-accent'}`}>
                   {msg.senderType === 'BOT' ? <Bot className="w-4 h-4 text-brand-accent" /> : <UserIcon className="w-4 h-4 text-white" />}
                 </div>
-                <div className={`max-w-[75%] flex flex-col ${msg.senderType === 'USER' ? 'items-end' : 'items-start'}`}>
+                <div className={`max-w-[85%] sm:max-w-[75%] flex flex-col ${msg.senderType === 'USER' ? 'items-end' : 'items-start'}`}>
                   <div className={`px-5 py-3.5 text-sm leading-relaxed shadow-lg ${
                     msg.senderType === 'USER' 
                       ? 'bg-gradient-to-r from-brand-accent to-blue-600 text-white rounded-2xl rounded-br-sm shadow-[0_4px_15px_rgba(59,130,246,0.3)]' 
@@ -250,7 +250,7 @@ const CitizenDashboard = () => {
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               disabled={isTyping}
               placeholder="Ask AquaShield AI about health, water, or risks..."
-              className="w-full bg-brand-surface border border-brand-border/80 rounded-xl px-5 py-4 pr-16 text-sm text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent/50 transition-all placeholder-brand-secondaryText shadow-inner"
+              className="w-full bg-brand-surface border border-brand-border/80 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 pr-14 sm:pr-16 text-sm text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent/50 transition-all placeholder-brand-secondaryText shadow-inner"
             />
             <button 
               onClick={handleSend}
@@ -264,7 +264,7 @@ const CitizenDashboard = () => {
       </div>
 
       {/* RIGHT PANEL - Live Data & Widgets */}
-      <div className="w-full lg:w-2/5 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2 pb-10">
+      <div className="w-full lg:w-2/5 flex flex-col gap-4 overflow-y-auto custom-scrollbar pb-10">
         
         {/* Risk Gauge & Village Stats */}
         <div className="glass-panel p-5 border border-brand-border/60 relative overflow-hidden group">

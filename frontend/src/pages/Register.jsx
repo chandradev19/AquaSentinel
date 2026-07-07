@@ -75,7 +75,7 @@ const Register = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="max-w-md w-full space-y-8 glass-panel p-10 relative z-10"
+        className="max-w-md w-full space-y-8 glass-panel p-5 sm:p-8 md:p-10 relative z-10"
       >
         <div className="flex flex-col items-center">
           <motion.div

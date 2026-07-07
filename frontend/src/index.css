@@ -5,6 +5,27 @@
 
 body {
   @apply bg-brand-background text-brand-primaryText font-sans antialiased selection:bg-brand-accent/30 selection:text-white;
+  overflow-x: hidden;
+}
+
+/* Prevent layout shift on touch devices */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Responsive scrollable table wrapper */
+.responsive-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep scrollability (for chip rows etc.) */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Force dark mode behavior since we are defaulting to this dark-matte premium look */

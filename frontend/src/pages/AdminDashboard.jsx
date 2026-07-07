@@ -180,7 +180,7 @@ const AdminDashboard = () => {
     <div className="space-y-6 pb-12 font-sans">
       
       {/* Top row metrics cards (7 KPI row from reference image) */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
         <StatCard title="Villages Monitored" value={villages.length} change="↑ 12 this month" isPositive={true} icon={Globe} delay={0.05} />
         <StatCard title="Citizens Registered" value="12,450" change="↑ 8.2% this month" isPositive={true} icon={Users} delay={0.1} />
         <StatCard title="Health Workers" value="345" change="↑ 5 this month" isPositive={true} icon={Users} delay={0.15} />
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Middle row main grid (Map, Chart, Critical Alerts) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6">
         
         {/* National Risk Map */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="lg:col-span-5 bg-[#111827] border border-[#1E293B] rounded-2xl p-5 flex flex-col h-[480px]">
@@ -332,7 +332,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Bottom row grid (Recent Reports, Donuts, AI Insights) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6">
         
         {/* Recent Inbound Reports */}
         <div className="lg:col-span-4 bg-[#111827] border border-[#1E293B] rounded-2xl p-5 flex flex-col h-[400px]">
@@ -489,7 +489,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* District Risk Ranking & Operational Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
         {/* District Risk Ranking */}
         <div className="bg-[#111827] border border-[#1E293B] rounded-2xl p-5 flex flex-col h-[320px]">

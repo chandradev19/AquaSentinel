@@ -242,7 +242,7 @@ const HealthWorkerDashboard = () => {
       </div>
 
       {/* 5 KPI Widgets Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
         {/* Widget 1: Assigned Villages */}
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="luxury-card p-5 flex flex-col justify-between">
           <div>
@@ -317,14 +317,14 @@ const HealthWorkerDashboard = () => {
       </div>
 
       {/* Main Content Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 sm:gap-8">
         
         {/* Left Side: Work Queues, Actions & Forms */}
         <div className="lg:col-span-8 space-y-6">
           
           <div className="glass-panel overflow-hidden border border-brand-border">
             {/* Tabs Selector */}
-            <div className="border-b border-brand-border bg-brand-surface/70 p-4 sm:px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="border-b border-brand-border bg-brand-surface/70 p-3 sm:p-4 sm:px-6 flex flex-col gap-3">
               <div className="flex space-x-1 bg-brand-background p-1.5 rounded-xl border border-brand-border overflow-x-auto w-full sm:w-auto">
                 <button 
                   onClick={() => setActiveTab('validation')}
