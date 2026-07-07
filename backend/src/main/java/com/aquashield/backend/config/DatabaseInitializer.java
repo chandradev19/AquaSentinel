@@ -103,9 +103,22 @@ public class DatabaseInitializer {
         };
     }
 
-
-
-
-
-
+    @Bean
+    public CommandLineRunner initPrimaryAdmin(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        return args -> {
+            String adminEmail = "admin@aquashield.com";
+            if (userRepository.findByEmail(adminEmail).isEmpty()) {
+                User admin = User.builder()
+                        .name("AquaShield Administrator")
+                        .email(adminEmail)
+                        .password(passwordEncoder.encode("Admin@123"))
+                        .role(Role.ADMIN)
+                        .build();
+                userRepository.save(admin);
+                System.out.println("[INIT] Primary admin created: " + adminEmail);
+            } else {
+                System.out.println("[INIT] Primary admin already exists: " + adminEmail);
+            }
+        };
+    }
 }
